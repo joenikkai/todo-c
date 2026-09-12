@@ -15,7 +15,7 @@
  **/
 #include "todo-c.h"
 
-#define FN_FMT(username,now,objective)  ("%s_%s_%s.txt",username,ctime(now),objective)
+#define FN_FMT(username,now,objective)  ("%s_%s_%s.txt",username,ctime(&now),objective)
 
 char* GenerateFileName(char **ptr_to_fname,char*username, char *objective) {
     char *ret_v;
