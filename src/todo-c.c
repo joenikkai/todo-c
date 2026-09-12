@@ -78,4 +78,28 @@ void __SwapTask (ToDoList_t,size_t) {}
 
 TaskToDo_t __EraseTask (ToDoList_t,size_t) {}
 
-ToDoList_t InitializeList(WINDOW *win) {}
+ToDoList_t InitializeList(WINDOW **win) {
+    if (!win || !*win) {
+        #ifdef DEBUG
+        assert(*win);
+        #else
+        printf("could not initialize the todo list.");
+        #endif // DEBUG
+    }
+    TaskToDo_t *__tasks = calloc(CAPACITY,sizeof(TaskToDo_t));
+    if (!__tasks) {
+        printw("could not allocate memory for tasks\n");
+    }
+    ToDoList_t ret_v = {
+        .Run = __Run,
+        .AppendTask = __AppendTask,
+        .SwapTask = __SwapTask,
+        .EraseTask = __EraseTask,
+        .lwin = *win,
+        .capacity = CAPACITY,
+        .n_tasks = 0,
+        .tasks  = __tasks
+    };
+    *win = NULL;
+    return ret_v;
+}
