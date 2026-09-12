@@ -21,11 +21,12 @@
 #include <ncurses.h>
 #include <string.h>
 
+#define DEBUG
+
 #ifdef DEBUG
 #include <assert.h>
 #endif // DEBUG
 
-#define DEBUG
 #define CAPACITY 10
 
 typedef struct TasksToDo {
