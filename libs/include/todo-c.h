@@ -47,5 +47,5 @@ typedef struct ToDoList {
 
 
 char* GenerateFileName(char **ptr_to_fn,char*username, char *objective);
-
+char* getDialogInput(char * msg);
 #endif // !TODO_C

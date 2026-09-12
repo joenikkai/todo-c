@@ -28,7 +28,14 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 #endif // DEBUG
+
     printw(" --- todo-c implementation ---");
+
+    if (!argv[1] || !argv[2]) {
+        argv[1] = getDialogInput("What is your name? ");
+        argv[2] = getDialogInput("What is your main objective for today? ");
+    }
+
     getch();
     endwin();
     return EXIT_SUCCESS;

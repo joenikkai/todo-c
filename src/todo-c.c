@@ -22,10 +22,29 @@ char* GenerateFileName(char **ptr_to_fname,char*username, char *objective) {
     size_t ret_len;
 
     time_t now = time(NULL);
-    
+
     sprintf(ret_v,FN_FMT(username,now,objective));
     ret_len = strlen(ret_v);
 
     strncpy(*ptr_to_fname,ret_v,ret_len);
     return ret_v;
+}
+
+char* getDialogInput(char * msg) {
+    int y, x, pos_y = 0, pos_x = 0, len = strlen(msg), padding = 2;
+    getmaxyx(stdscr,y,x);
+    
+    WINDOW *dialog;
+    if ( x > len && y > MIN_WINDOW_HEIGHT) {
+        dialog = newwin(MIN_WINDOW_HEIGHT + padding, len + padding, ((y / 2) - ((MIN_WINDOW_HEIGHT + padding ) / 2)), ((x / 2) - ((len + padding ) / 2))); // size,size,origin,origin
+        refresh();
+        box(dialog,0,0);
+        wrefresh(dialog);
+        mvwprintw(dialog,++pos_y,++pos_x,"%s",msg);
+
+        char *ret_v;
+        mvwgetstr(dialog, ++pos_y, pos_x, ret_v);
+        return ret_v;
+    }
+    return NULL;
 }
