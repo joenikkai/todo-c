@@ -17,7 +17,7 @@
 
 int main(int argc, char **argv) {
     if (argc < 3) {
-        printf("Usage: %s \"username\" \"objective\"\n",*argv);
+        printf("Usage: \n\t%s \"username\" \"objective\"\n",*argv);
     }
     WINDOW* root = initscr();
 #ifdef DEBUG
