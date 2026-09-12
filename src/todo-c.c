@@ -68,3 +68,14 @@ char* SanitizeInput(char *msg) {
     
     return msg;
 }
+
+
+void __Run() {}
+
+void __AppendTask (ToDoList_t, TaskToDo_t) {}
+
+void __SwapTask (ToDoList_t,size_t) {}
+
+TaskToDo_t __EraseTask (ToDoList_t,size_t) {}
+
+ToDoList_t InitializeList(WINDOW *win) {}
