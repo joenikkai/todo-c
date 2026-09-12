@@ -18,6 +18,7 @@
 
 #define MIN_WINDOW_HEIGHT 5
 #define MIN_WINDOW_WIDTH 12
+#define MAX_BUFFER_SIZE 256
 
 #include <stdlib.h>
 #include <time.h>

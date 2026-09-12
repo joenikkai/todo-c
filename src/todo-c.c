@@ -31,19 +31,24 @@ char* GenerateFileName(char **ptr_to_fname,char*username, char *objective) {
 }
 
 char* getDialogInput(char * msg) {
-    int y, x, pos_y = 0, pos_x = 0, len = strlen(msg), padding = 2;
+    int y, x, pos_y = 0, pos_x = 0, len = strlen(msg), padding = 3;
     getmaxyx(stdscr,y,x);
     
     WINDOW *dialog;
     if ( x > len && y > MIN_WINDOW_HEIGHT) {
-        dialog = newwin(MIN_WINDOW_HEIGHT + padding, len + padding, ((y / 2) - ((MIN_WINDOW_HEIGHT + padding ) / 2)), ((x / 2) - ((len + padding ) / 2))); // size,size,origin,origin
+        dialog = newwin(MIN_WINDOW_HEIGHT + padding, len + padding, ((y / 2) - (MIN_WINDOW_HEIGHT / 2)), ((x / 2) - ((len + padding ) / 2))); // size,size,origin,origin
         refresh();
-        box(dialog,0,0);
+        mvwvline(dialog,1,0,0,2);
+        mvwhline(dialog,0,1,0,2);
         wrefresh(dialog);
-        mvwprintw(dialog,++pos_y,++pos_x,"%s",msg);
+        mvwprintw(dialog, ++pos_y, pos_x += 2,"%s",msg);
 
-        char *ret_v;
-        mvwgetstr(dialog, ++pos_y, pos_x, ret_v);
+        char buffer[MAX_BUFFER_SIZE];
+        mvwgetstr(dialog, ++pos_y, pos_x, buffer);
+        size_t len = strlen(buffer);
+
+        char* ret_v = calloc(len, sizeof(char));
+        strncpy(ret_v,buffer,len);
         return ret_v;
     }
     return NULL;
