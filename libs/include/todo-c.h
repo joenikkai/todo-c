@@ -1,11 +1,21 @@
 #ifndef TODO_C
-#include <ctime>
 
-typedef struct ItemToDo {
-    char status[5];
-    int item_number;
-    char *item_description;
+#include <stdlib.h>
+#include <time.h>
+
+
+#define CAPACITY 10
+
+typedef struct TasksToDo {
+    char task_status[5];
+    int tasks_number;
+    char *tasks_description;
     time_t timestamp;
-} ItemToDo_t;
+} TasksToDo_t;
 
+typedef struct ToDoList {
+    size_t capacity;
+    size_t n_tasks;
+    TasksToDo_t* tasks;
+} ToDoList_t;
 #endif // !TODO_C
