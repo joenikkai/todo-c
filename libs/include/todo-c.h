@@ -49,4 +49,5 @@ typedef struct ToDoList {
 
 char* GenerateFileName(char **ptr_to_fn,char*username, char *objective);
 char* getDialogInput(char * msg);
+char* SanitizeInput(char*msg); // \brief illegal chars with space
 #endif // !TODO_C

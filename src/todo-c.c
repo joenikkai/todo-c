@@ -53,3 +53,18 @@ char* getDialogInput(char * msg) {
     }
     return NULL;
 }
+
+char* SanitizeInput(char *msg) {
+    if (NULL == msg) return NULL;
+
+    const char *illchars = ",<>:?*\"/\\|";
+
+    for (char *p = msg; *p;p++) {
+        unsigned char c = (unsigned char)*p;
+        if (strchr(illchars,c) || c < 32 || c == 127) {
+            *p = ' ';
+        }
+    }
+    
+    return msg;
+}
