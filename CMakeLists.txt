@@ -21,6 +21,16 @@ add_executable(
     src/main.c
 )
 
+
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC 
+    ${CMAKE_SOURCE_DIR}/libs
+    ${CMAKE_SOURCE_DIR}/libs/include
+)
+
+
+# add ncursesw
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(NCURSESW REQUIRED ncursesw)
 
