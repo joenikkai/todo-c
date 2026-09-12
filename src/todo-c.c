@@ -18,11 +18,14 @@
 #define FN_FMT(username,now,objective)  ("%s_%s_%s.txt",username,ctime(now),objective)
 
 char* GenerateFileName(char **ptr_to_fname,char*username, char *objective) {
-    time_t now = time(NULL);
-    sprintf(*ptr_to_fname,FN_FMT(username,now,objective));
+    char *ret_v;
+    size_t ret_len;
 
-    size_t ret_len = strlen(*ptr_to_fname);
-    char *ret_v = malloc(sizeof(char) * (ret_len+1));
-    strncpy(ret_v,*ptr_to_fname,ret_len);
+    time_t now = time(NULL);
+    
+    sprintf(ret_v,FN_FMT(username,now,objective));
+    ret_len = strlen(ret_v);
+
+    strncpy(*ptr_to_fname,ret_v,ret_len);
     return ret_v;
 }
