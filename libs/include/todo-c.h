@@ -16,6 +16,9 @@
 
 #ifndef TODO_C
 
+#define MIN_WINDOW_HEIGHT 5
+#define MIN_WINDOW_WIDTH 12
+
 #include <stdlib.h>
 #include <time.h>
 #include <ncurses.h>
