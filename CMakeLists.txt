@@ -19,6 +19,7 @@ project(todo-c C)
 add_executable(
     ${PROJECT_NAME} 
     src/main.c
+    src/todo-c.c
 )
 
 
