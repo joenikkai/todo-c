@@ -16,6 +16,9 @@
 #include "todo-c.h"
 
 int main(int argc, char **argv) {
+    if (argc < 3) {
+        printf("Usage: %s \"username\" \"objective\"\n",*argv);
+    }
     WINDOW* root = initscr();
 #ifdef DEBUG
     assert(root);
