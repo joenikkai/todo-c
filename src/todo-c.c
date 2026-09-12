@@ -15,3 +15,14 @@
  **/
 #include "todo-c.h"
 
+#define FN_FMT(username,now,objective)  ("%s_%s_%s.txt",username,ctime(now),objective)
+
+char* GenerateFileName(char **ptr_to_fname,char*username, char *objective) {
+    time_t now = time(NULL);
+    sprintf(*ptr_to_fname,FN_FMT(username,now,objective));
+
+    size_t ret_len = strlen(*ptr_to_fname);
+    char *ret_v = malloc(sizeof(char) * (ret_len+1));
+    strncpy(ret_v,*ptr_to_fname,ret_len);
+    return ret_v;
+}

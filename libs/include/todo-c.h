@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ncurses.h>
+#include <string.h>
 
 #ifdef DEBUG
 #include <assert.h>
@@ -39,4 +40,8 @@ typedef struct ToDoList {
     size_t n_tasks;
     TasksToDo_t* tasks;
 } ToDoList_t;
+
+
+char* GenerateFileName(char **ptr_to_fn,char*username, char *objective);
+
 #endif // !TODO_C
