@@ -45,10 +45,10 @@ typedef struct ToDoList {
     size_t n_tasks; // number of tasks hend in that specific day
     TaskToDo_t* tasks; // pointer to where the tasks are stored in memory
     WINDOW * lwin; // window where the tasks are displayed
-    void (*Run)(ToDoList_t); // mainloop
-    void (*AppendTask)(ToDoList_t, TaskToDo_t); // listen for new tasks
-    void (*SwapTask)(ToDoList_t,size_t); // replace task
-    TaskToDo_t (*EraseTask)(ToDoList_t,size_t); // mark a task as done, todo or quit
+    void (*Run)(struct ToDoList *); // mainloop
+    void (*AppendTask)(struct ToDoList *, TaskToDo_t); // listen for new tasks
+    void (*SwapTask)(struct ToDoList *,size_t); // replace task
+    TaskToDo_t (*EraseTask)(struct ToDoList *,size_t); // mark a task as done, todo or quit
 } ToDoList_t;
 
 
