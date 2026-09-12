@@ -30,13 +30,17 @@ int main(int argc, char **argv) {
 #endif // DEBUG
 
     printw(" --- todo-c implementation ---");
-
+    printw("%s,%s,%s\n",argv[0],argv[1],argv[2]);
     if (!argv[1] || !argv[2]) {
-        argv[1] = getDialogInput("What is your name? ");
-        argv[2] = getDialogInput("What is your main objective for today? ");
+        if (!argv[1]) {
+            argv[1] =  SanitizeInput(getDialogInput("What is your name? "));
+        }
+        argv[2] = SanitizeInput(getDialogInput("What is your main objective for today? "));
     }
 
     getch();
     endwin();
+
+    printf("-- todo-c --\n\tuser: %s\n\tobjective: %s\n",argv[1],argv[2]);
     return EXIT_SUCCESS;
 }
