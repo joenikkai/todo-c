@@ -38,6 +38,11 @@ int main(int argc, char **argv) {
         argv[2] = SanitizeInput(getDialogInput("What is your main objective for today? "));
     }
 
+    int x,y;
+    getmaxyx(stdscr,y,x);
+
+    WINDOW *task_l_win = newwin(y,x,0,0);
+    ToDoList_t task_list = InitializeList(&task_l_win);
     getch();
     endwin();
 
