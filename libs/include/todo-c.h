@@ -41,14 +41,14 @@ typedef struct TaskToDo {
 } TaskToDo_t;
 
 typedef struct ToDoList {
-    size_t capacity;
-    size_t n_tasks;
-    TaskToDo_t* tasks;
-    WINDOW * lwin;
-    void (*Run)();
-    void (*AppendTask)(ToDoList_t, TaskToDo_t);
-    void (*SwapTask)(ToDoList_t,size_t);
-    TaskToDo_t (*EraseTask)(ToDoList_t,size_t);
+    size_t capacity; // maximum number of tasks that can be hend in a day
+    size_t n_tasks; // number of tasks hend in that specific day
+    TaskToDo_t* tasks; // pointer to where the tasks are stored in memory
+    WINDOW * lwin; // window where the tasks are displayed
+    void (*Run)(ToDoList_t); // mainloop
+    void (*AppendTask)(ToDoList_t, TaskToDo_t); // listen for new tasks
+    void (*SwapTask)(ToDoList_t,size_t); // replace task
+    TaskToDo_t (*EraseTask)(ToDoList_t,size_t); // mark a task as done, todo or quit
 } ToDoList_t;
 
 
@@ -57,5 +57,5 @@ char* GenerateFileName(char **ptr_to_fn,char*username, char *objective);
 char* getDialogInput(char * msg);
 char* SanitizeInput(char*msg); // \brief illegal chars with space
 
-ToDoList_t InitializeList(WINDOW *win);
+ToDoList_t InitializeList(WINDOW **win);
 #endif // !TODO_C
