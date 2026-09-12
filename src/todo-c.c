@@ -70,13 +70,13 @@ char* SanitizeInput(char *msg) {
 }
 
 
-void __Run() {}
+void __Run(ToDoList_t *tsk_l) {}
 
-void __AppendTask (ToDoList_t, TaskToDo_t) {}
+void __AppendTask (ToDoList_t *tsk_l, TaskToDo_t t) {}
 
-void __SwapTask (ToDoList_t,size_t) {}
+void __SwapTask (ToDoList_t *tsk_l,size_t n) {}
 
-TaskToDo_t __EraseTask (ToDoList_t,size_t) {}
+TaskToDo_t __EraseTask (ToDoList_t *tsk_l,size_t n) {}
 
 ToDoList_t InitializeList(WINDOW **win) {
     if (!win || !*win) {
