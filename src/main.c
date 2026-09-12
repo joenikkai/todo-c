@@ -13,13 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **/
-#define DEBUG
-#include <stdlib.h>
-#include <ncurses.h>
-
-#ifdef DEBUG
-#include <assert.h>
-#endif // DEBUG
+#include "todo-c.h"
 
 int main(int argc, char **argv) {
     WINDOW* root = initscr();

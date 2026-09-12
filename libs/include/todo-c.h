@@ -18,8 +18,13 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <ncurses.h>
 
+#ifdef DEBUG
+#include <assert.h>
+#endif // DEBUG
 
+#define DEBUG
 #define CAPACITY 10
 
 typedef struct TasksToDo {
