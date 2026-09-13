@@ -80,14 +80,17 @@ void __Run(ToDoList_t *tsk_l) {
         getch();
     }
 
+    char INPUT_BUFFER[INPUT_BUFFER_SIZE];
+
+
     int ORIGIN = 0;
     int HEAD_HEIGHT = 1, HEAD_WIDTH = x;
     int TAIL_HEIGHT = 3, TAIL_WIDTH = x;
     int BODY_HEIGHT = y - (HEAD_HEIGHT + TAIL_HEIGHT), BODY_WIDTH = x;
 
-    WINDOW *head = subwin(tsk_l->lwin,HEAD_HEIGHT,HEAD_WIDTH,ORIGIN,ORIGIN);
-    WINDOW *tail = subwin(tsk_l->lwin,TAIL_HEIGHT,TAIL_WIDTH,HEAD_HEIGHT + BODY_HEIGHT,ORIGIN);
-    WINDOW *body = subwin(tsk_l->lwin,BODY_HEIGHT,BODY_WIDTH,HEAD_HEIGHT,ORIGIN);
+    WINDOW *head = subwin(tsk_l->lwin, HEAD_HEIGHT, HEAD_WIDTH, ORIGIN, ORIGIN);
+    WINDOW *tail = subwin(tsk_l->lwin, TAIL_HEIGHT, TAIL_WIDTH, HEAD_HEIGHT + BODY_HEIGHT, ORIGIN);
+    WINDOW *body = subwin(tsk_l->lwin, BODY_HEIGHT, BODY_WIDTH, HEAD_HEIGHT, ORIGIN);
     touchwin(tsk_l->lwin); 
     mvwprintw(head,0, (HEAD_WIDTH / 2) - ((PROJECT_NAME_LENGTH * 2) / 3),PROJECT_NAME);
     box(tail, 0, 0);
@@ -95,13 +98,26 @@ void __Run(ToDoList_t *tsk_l) {
     wrefresh(head);
     wrefresh(tail);
     wrefresh(body);
-    getch();
+
     // static bool is_running = true;
-    //
+    // 
     // while(is_running) {
-    //     if (tsk_l->n_tasks == 0) {
-    //         //
-    //     }
+        if (tsk_l->n_tasks == 0) {
+            mvwprintw(body, ((BODY_HEIGHT / 2) - 1), (BODY_WIDTH / 2 ) - (PROMPT_EMPTY__ADD_A_TASK_TODO_LENGTH / 2),PROMPT_EMPTY__ADD_A_TASK_TODO);
+            mvwprintw(body, (BODY_HEIGHT / 2), (BODY_WIDTH / 2 ) - 1,"+");
+        }
+        strncpy((char *)INPUT_BUFFER,INPUT_TASK_PROMPT,INPUT_BUFFER_SIZE);
+
+
+        mvwprintw(tail, REPL_CHARACTER_LABEL_ORIGIN_POSITION_Y, REPL_CHARACTER_LABEL_ORIGIN_POSITION_X, REPL_CHARACTER_LABEL "%s",INPUT_BUFFER);
+        touchwin(tsk_l->lwin);
+
+        box(tail, 0, 0);
+        box(body, 0, 0);
+
+        wrefresh(body);
+        wrefresh(tail);
+        getch();
     // }
 }
 
