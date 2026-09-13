@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     }
 #endif // DEBUG
 
-    printw(" --- todo-c implementation ---");
+    printw(" --- " PROJECT_NAME " implementation ---");
     printw("%s,%s,%s\n",argv[0],argv[1],argv[2]);
     if (!argv[1] || !argv[2]) {
         if (!argv[1]) {
@@ -51,6 +51,6 @@ int main(int argc, char **argv) {
     getch();
     endwin();
 
-    printf("-- todo-c --\n\tuser: %s\n\tobjective: %s\n",argv[1],argv[2]);
+    printf("-- "PROJECT_NAME" --\n\tuser: %s\n\tobjective: %s\n",argv[1],argv[2]);
     return EXIT_SUCCESS;
 }

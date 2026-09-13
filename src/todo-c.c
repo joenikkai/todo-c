@@ -89,7 +89,7 @@ void __Run(ToDoList_t *tsk_l) {
     WINDOW *tail = subwin(tsk_l->lwin,TAIL_HEIGHT,TAIL_WIDTH,HEAD_HEIGHT + BODY_HEIGHT,ORIGIN);
     WINDOW *body = subwin(tsk_l->lwin,BODY_HEIGHT,BODY_WIDTH,HEAD_HEIGHT,ORIGIN);
     touchwin(tsk_l->lwin); 
-    whline(head,0,HEAD_WIDTH);
+    mvwprintw(head,0, (HEAD_WIDTH / 2) - ((PROJECT_NAME_LENGTH * 2) / 3),PROJECT_NAME);
     box(tail, 0, 0);
     box(body, 0, 0);
     wrefresh(head);

@@ -16,6 +16,8 @@
 
 #ifndef TODO_C
 
+#define PROJECT_NAME "todo-c"
+
 #define MIN_WINDOW_HEIGHT 5
 #define MIN_WINDOW_WIDTH 12
 
@@ -26,6 +28,8 @@
 #include <time.h>
 #include <ncurses.h>
 #include <string.h>
+
+static const int PROJECT_NAME_LENGTH =  strlen(PROJECT_NAME);
 
 #define DEBUG
 
