@@ -18,6 +18,8 @@
 
 #define MIN_WINDOW_HEIGHT 5
 #define MIN_WINDOW_WIDTH 12
+
+#define MIN_ROOT_HEIGHT (MIN_WINDOW_HEIGHT * 2)
 #define MAX_BUFFER_SIZE 256
 
 #include <stdlib.h>
