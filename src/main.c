@@ -41,8 +41,13 @@ int main(int argc, char **argv) {
     int x,y;
     getmaxyx(stdscr,y,x);
 
-    WINDOW *task_l_win = newwin(y,x,0,0);
-    ToDoList_t task_list = InitializeList(&task_l_win);
+    ToDoList_t task_list;
+    {
+        WINDOW *task_l_win = newwin(y,x,0,0);
+        assert(task_l_win);
+        task_list = InitializeList(&task_l_win);
+    }
+    task_list.Run(&task_list);
     getch();
     endwin();
 

@@ -70,7 +70,40 @@ char* SanitizeInput(char *msg) {
 }
 
 
-void __Run(ToDoList_t *tsk_l) {}
+void __Run(ToDoList_t *tsk_l) {
+    int y,x;
+    getmaxyx(tsk_l->lwin,y,x);
+    
+    while (y < MIN_ROOT_HEIGHT || x < MIN_WINDOW_WIDTH) {
+        printw("make your screen bigger to render the UI.");
+        refresh();
+        getch();
+    }
+
+    int ORIGIN = 0;
+    int HEAD_HEIGHT = 1, HEAD_WIDTH = x;
+    int TAIL_HEIGHT = 3, TAIL_WIDTH = x;
+    int BODY_HEIGHT = y - (HEAD_HEIGHT + TAIL_HEIGHT), BODY_WIDTH = x;
+
+    WINDOW *head = subwin(tsk_l->lwin,HEAD_HEIGHT,HEAD_WIDTH,ORIGIN,ORIGIN);
+    WINDOW *tail = subwin(tsk_l->lwin,TAIL_HEIGHT,TAIL_WIDTH,HEAD_HEIGHT + BODY_HEIGHT,ORIGIN);
+    WINDOW *body = subwin(tsk_l->lwin,BODY_HEIGHT,BODY_WIDTH,HEAD_HEIGHT,ORIGIN);
+    touchwin(tsk_l->lwin); 
+    whline(head,0,HEAD_WIDTH);
+    box(tail, 0, 0);
+    box(body, 0, 0);
+    wrefresh(head);
+    wrefresh(tail);
+    wrefresh(body);
+    getch();
+    // static bool is_running = true;
+    //
+    // while(is_running) {
+    //     if (tsk_l->n_tasks == 0) {
+    //         //
+    //     }
+    // }
+}
 
 void __AppendTask (ToDoList_t *tsk_l, TaskToDo_t t) {}
 
