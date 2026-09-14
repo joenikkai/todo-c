@@ -91,6 +91,7 @@ void __Run(ToDoList_t *tsk_l) {
     WINDOW *head = subwin(tsk_l->lwin, HEAD_HEIGHT, HEAD_WIDTH, ORIGIN, ORIGIN);
     WINDOW *tail = subwin(tsk_l->lwin, TAIL_HEIGHT, TAIL_WIDTH, HEAD_HEIGHT + BODY_HEIGHT, ORIGIN);
     WINDOW *body = subwin(tsk_l->lwin, BODY_HEIGHT, BODY_WIDTH, HEAD_HEIGHT, ORIGIN);
+    
     touchwin(tsk_l->lwin); 
     mvwprintw(head,0, (HEAD_WIDTH / 2) - ((PROJECT_NAME_LENGTH * 2) / 3),PROJECT_NAME);
     box(tail, 0, 0);
@@ -98,7 +99,10 @@ void __Run(ToDoList_t *tsk_l) {
     wrefresh(head);
     wrefresh(tail);
     wrefresh(body);
-
+#ifdef DEBUG
+    memcpy(tsk_l->tasks,EXAMPLE_DEBUG_TASKS,EXAMPLE_DEBUG_TASKS_LENGTH);
+    tsk_l->n_tasks = EXAMPLE_DEBUG_TASKS_LENGTH;
+#endif // DEBUG
     // static bool is_running = true;
     // 
     // while(is_running) {
