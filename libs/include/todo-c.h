@@ -77,7 +77,7 @@ typedef struct ToDoList {
 
 #define EXAMPLE_DEBUG_TASKS_LENGTH 5
 
-static const TaskToDo_t EXAMPLE_DEBUG_TASKS[5] = {
+static const TaskToDo_t EXAMPLE_DEBUG_TASKS[EXAMPLE_DEBUG_TASKS_LENGTH] = {
     {.task_status="DONE",.task_description="Learn C Programming Language",.task_number=11,.task_timestamp=1789318332},
     {.task_status="DONE",.task_description="Cook Food",.task_number=11,.task_timestamp=1789318437},
     {.task_status="DONE",.task_description="Take a Walk",.task_number=11,.task_timestamp=1789318450},
