@@ -15,22 +15,40 @@
  **/
 #include "todo-c.h"
 
-#define FN_FMT(username,now,objective)  ("%s_%s_%s.txt",username,ctime(&now),objective)
 
-char* GenerateFileName(char **ptr_to_fname,char*username, char *objective) {
-    char *ret_v;
-    size_t ret_len;
+char* GenerateFileName(char **ptr_to_fname, char *username, char *objective) {
+    static const char* default_username = "Anonymous";
+    static const char* default_objective = "Just Chilling";
+    char *buff = calloc(MAX_BUFFER_SIZE,sizeof(char));
+    if (!buff) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    if (!username || strlen(username) == 0) {
+        username = (char *)default_username;
+    }
+    if (!objective || strlen(objective) == 0) {
+        objective = (char *)default_objective;
+    }
 
     time_t now = time(NULL);
+    char time_str[32];
+    strftime(time_str, sizeof time_str, "%Y-%m-%d_%H--%M--%S", localtime(&now));
 
-    sprintf(ret_v,FN_FMT(username,now,objective));
-    ret_len = strlen(ret_v);
+    strcat(buff,username);
+    strcat(buff,"_");
+    strcat(buff,objective);
+    strcat(buff,"_");
+    strcat(buff,time_str);
+    strcat(buff,".txt");
 
-    strncpy(*ptr_to_fname,ret_v,ret_len);
-    return ret_v;
+    if (ptr_to_fname) {
+        *ptr_to_fname = buff;
+    }
+    return buff;
 }
 
-char* getDialogInput(char * msg) {
+char *getDialogInput(char * msg,char *def_val) {
     int y, x, pos_y = 0, pos_x = 0, len = strlen(msg), padding = 3;
     getmaxyx(stdscr,y,x);
     
