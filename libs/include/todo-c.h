@@ -89,7 +89,7 @@ static const TaskToDo_t EXAMPLE_DEBUG_TASKS[EXAMPLE_DEBUG_TASKS_LENGTH] = {
 #endif // DEBUG
 
 char* GenerateFileName(char **ptr_to_fn,char*username, char *objective);
-char* getDialogInput(char * msg, char *def_val);
+char* getDialogInput(char * msg);
 char* SanitizeInput(char*msg); // \brief illegal chars with space
 
 ToDoList_t InitializeList(WINDOW **win);
