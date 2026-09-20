@@ -28,14 +28,20 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 #endif // DEBUG
+    cbreak();
 
     printw(" --- " PROJECT_NAME " implementation ---");
     printw("%s,%s,%s\n",argv[0],argv[1],argv[2]);
+    char *username = NULL;
+    char *objective = NULL;
     if (!argv[1] || !argv[2]) {
         if (!argv[1]) {
-            argv[1] =  SanitizeInput(getDialogInput("What is your name? "));
+            username =  SanitizeInput(getDialogInput("What is your name? ","Anonymous"));
         }
-        argv[2] = SanitizeInput(getDialogInput("What is your main objective for today? "));
+        objective = SanitizeInput(getDialogInput("What is your main objective for today? ","Just Chilling"));
+    } else {
+        username = argv[1];
+        objective = argv[2];
     }
 
     int x,y;
@@ -51,6 +57,9 @@ int main(int argc, char **argv) {
     getch();
     endwin();
 
-    printf("-- "PROJECT_NAME" --\n\tuser: %s\n\tobjective: %s\n",argv[1],argv[2]);
+    printf("-- "PROJECT_NAME" --\n\tuser: %s\n\tobjective: %s\n",username,objective);
+    char *filename = SanitizeInput(GenerateFileName(NULL,username,objective));
+    printf("generated file: %s\n",filename);
+    free(filename);
     return EXIT_SUCCESS;
 }
