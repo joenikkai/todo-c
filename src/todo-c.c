@@ -48,7 +48,7 @@ char* GenerateFileName(char **ptr_to_fname, char *username, char *objective) {
     return buff;
 }
 
-char *getDialogInput(char * msg,char *def_val) {
+char *getDialogInput(char * msg) {
     int y, x, pos_y = 0, pos_x = 0, len = strlen(msg), padding = 3;
     getmaxyx(stdscr,y,x);
     
@@ -61,11 +61,9 @@ char *getDialogInput(char * msg,char *def_val) {
         wrefresh(dialog);
         mvwprintw(dialog, ++pos_y, pos_x += 2,"%s",msg);
 
-        char buffer[MAX_BUFFER_SIZE];
+        char *buffer = calloc(MAX_BUFFER_SIZE,sizeof(char));
         mvwgetstr(dialog, ++pos_y, pos_x, buffer);
-        size_t len = strlen(buffer);
-
-        char* ret_v = calloc(len, sizeof(char));
+        char *ret_v = calloc(len, sizeof(char));
         strncpy(ret_v,buffer,len);
         return ret_v;
     }
@@ -79,8 +77,11 @@ char* SanitizeInput(char *msg) {
 
     for (char *p = msg; *p;p++) {
         unsigned char c = (unsigned char)*p;
-        if (strchr(illchars,c) || c < 32 || c == 127) {
+        if (strchr(illchars,c) || c < 32 || c == 127 ) {
             *p = ' ';
+        }
+        if (isspace(c)) {
+            *p = '-';
         }
     }
     
@@ -95,8 +96,8 @@ void ___todo_item_component(WINDOW **w, ToDoList_t *tsk_l) {
     int display_capacity = y / MIN_WINDOW_HEIGHT; // number of components that can be displayed at a time
     if (display_capacity == 0 ) return;
 
-    if (display_capacity > tsk_l->capacity) {
-        display_capacity = tsk_l->capacity;
+    if (display_capacity > tsk_l->n_tasks) {
+        display_capacity = tsk_l->n_tasks;
     }
 
     WINDOW *item_win[display_capacity];
@@ -111,7 +112,6 @@ void ___todo_item_component(WINDOW **w, ToDoList_t *tsk_l) {
         if (item_width < 1) continue;
 
         item_win[__i] = derwin(*w,item_height,item_width,item_y___origin,item_x___origin);
-        box(item_win[__i],DEFAULT_BORDER_CHARACTER,DEFAULT_BORDER_CHARACTER);
 
 
         mvwprintw(
@@ -124,6 +124,8 @@ void ___todo_item_component(WINDOW **w, ToDoList_t *tsk_l) {
             tsk_l->tasks[__i].task_description,
             ctime(&tsk_l->tasks[__i].task_timestamp)
         );
+
+        box(item_win[__i],DEFAULT_BORDER_CHARACTER,DEFAULT_BORDER_CHARACTER);
         wnoutrefresh(item_win[__i]);
     }
     doupdate();
