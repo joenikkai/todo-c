@@ -133,6 +133,7 @@ void ___todo_item_component(WINDOW **w, ToDoList_t *tsk_l) {
 }
 
 void __Run(ToDoList_t *tsk_l) {
+    curs_set(0);
     int y,x;
     getmaxyx(tsk_l->lwin,y,x);
     
@@ -165,8 +166,8 @@ void __Run(ToDoList_t *tsk_l) {
     memcpy(tsk_l->tasks,EXAMPLE_DEBUG_TASKS,EXAMPLE_DEBUG_TASKS_LENGTH * sizeof(EXAMPLE_DEBUG_TASKS[0]));
     tsk_l->n_tasks = EXAMPLE_DEBUG_TASKS_LENGTH;
 #endif // DEBUG
-    // static bool is_running = true;
-    // 
+    static bool is_running = true;
+     
     // while(is_running) {
         if (tsk_l->n_tasks == 0) {
             mvwprintw(body, ((BODY_HEIGHT / 2) - 1), (BODY_WIDTH / 2 ) - (PROMPT_EMPTY__ADD_A_TASK_TODO_LENGTH / 2),PROMPT_EMPTY__ADD_A_TASK_TODO);
@@ -184,8 +185,7 @@ void __Run(ToDoList_t *tsk_l) {
 
         wrefresh(body);
         wrefresh(tail);
-        getch();
-    // }
+     // }
 }
 
 void __AppendTask (ToDoList_t *tsk_l, TaskToDo_t t) {}
