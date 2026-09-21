@@ -36,9 +36,9 @@ int main(int argc, char **argv) {
     char *objective = NULL;
     if (!argv[1] || !argv[2]) {
         if (!argv[1]) {
-            username =  SanitizeInput(getDialogInput("What is your name? ","Anonymous"));
+            username =  SanitizeInput(getDialogInput("What is your name? "));
         }
-        objective = SanitizeInput(getDialogInput("What is your main objective for today? ","Just Chilling"));
+        objective = SanitizeInput(getDialogInput("What is your main objective for today? "));
     } else {
         username = argv[1];
         objective = argv[2];
